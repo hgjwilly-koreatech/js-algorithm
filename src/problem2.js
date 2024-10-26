@@ -4,14 +4,14 @@ function problem2(cryptogram) {
   while(true){
     let isDone = true;
 
-    for(let i =0; i<answer.length-1; i++){
-      if(answer[i] === answer[i+1]){
-        answer.splice(i, 2);
+    for(let i =0; i<answer.length-1; i++){ // 각 자릿수 확인
+      if(answer[i] === answer[i+1]){ // 연속 발견하면
+        answer.splice(i, 2); // 삭제
         isDone = false;
-        break;
+        break; // 처음 요소부터 다시 확인
       }
     }
-    if(isDone) break;
+    if(isDone) break; // 위에서 완료해서 break 이뤄지지 않았으면, while문 종료
   }
 
   return answer.join(''); // string 으로 바꿈

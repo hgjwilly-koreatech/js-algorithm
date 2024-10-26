@@ -1,56 +1,42 @@
 function problem6(forms) {
+  let twoCharArr = [];
+  let nameArr = [];
 
-  // STEP1 : 두글자의 모든 경우에 수에 대해 확인한다. 확인 결과를 countArr에 저장한다
-  // countArr[i][0] : 두글자
-  // countArr[i][1] : index들을 요소로 갖는 배열
-  //                  index : 특정 두글자를 이름에 갖고있는 사람들이 forms 에서 몇번째인지
+  for(let [,name] of forms){ // 각 이름에 대해
+    let nameChars = name.split('');
 
-  let countArr = []; // 빈상태
-  
-  for(let i = 0; i < forms.length; i++){ // forms에서 각 사람들에 대해 확인
+    for(let i = 0; i < name.length-1; i++){
+      let twoChar = nameChars[i] + nameChars[i+1]; // 두글자씩 뽑아서
+      let isDone = false;
 
-    let arrName = forms[i][1].split(''); // 이름으로부터
-
-    for(let j = 0; j < arrName.length-1; j++){ 
-      let twoStr = arrName[j] + arrName[j+1]; // 두글자 추출해서
-
-      addToCountArr(twoStr, i, countArr); // 확인 후 countArr에 반영
+      for(let idx in twoCharArr){
+        if(twoCharArr[idx] == twoChar){ // 두글자 배열에 있으면
+          nameArr[idx].push(name); // 이름 이중배열의 같은 인덱스에 이름을 추가
+          isDone = true;
+          break;
+        }
+      }
+      if(!isDone){ // 두글자 배열에 없으면
+        twoCharArr.push(twoChar); // 두글자 배열에 추가
+        nameArr.push([name]); // 이름 이중배열에 이름이 담긴 배열 추가
+      }
     }
   }
 
-  
-  // STEP2 : countArr 에서 두글자가 중복된 case를 확인, 그 사람들의 email을 배열로 만들어서 반환
+  answerArr = [];
 
-  let answer = []; // 반환할 email을 담을 배열
-  let answerIdxArr;
-  
-  for(let i = 0; i < countArr.length; i++){
-    if(1 < countArr[i][1].length){ // 여러사람이 갖는 두글자를 발견하면 (index가 2개이상 있으면)
-      answerIdxArr = countArr[i][1]; // 그 사람들의 index를 담은 배열을 추출하고
+  for(let names of nameArr){ // 이름 배열의 값에 대해
+    if(1 < names.length){ // 이름 여러명이 담긴 배열을 발견하면
+      for(let name of names){ // 해당 이름들에 대해
+        for(let [email, name2] of forms){
+          if(name == name2 && !answerArr.includes(email)) answerArr.push(email); // 이메일을 찾아서 추가
+        }
+      }
       break;
     }
   }
-
-  for(let j = 0; j < answerIdxArr.length; j++){
-    answer.push(forms[answerIdxArr[j]][0]); // forms에서 그 사람들의 email을 찾아서, answer 배열에 추가
-  }
-  answer.sort();
-  return answer;
+  answerArr.sort();
+  return answerArr;
 }
 
-function addToCountArr(twoStr, idxPerson, countArr){
-
-  let isDone = false;
-
-  for(let i = 0; i < countArr.length; i++){ /// countArr를 순회한다
-    if(countArr[i][0] == twoStr) { // 이미 확인된 두글자라면
-      countArr[i][1].push(idxPerson); // 해당 두글자를 갖는 0번으로 갖는 배열의 1번인 index 배열에 index를 추가
-      isDone = true;
-      break;
-    }
-  }
-  if(!isDone){ // 새로운 두글자라면
-    countArr.push([twoStr,[idxPerson]]); // countArr에 새로운 두글자와 index를 추가
-  }
-}
 module.exports = problem6;

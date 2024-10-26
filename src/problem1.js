@@ -1,5 +1,5 @@
 function problem1(pobi, crong) {
-  if(!(pobi[0]+1 === pobi[1]) || !(crong[0]+1) === crong[1]) return -1;
+  if(!(pobi[0]+1 === pobi[1]) || !(crong[0]+1) === crong[1]) return -1; //checked
   
   let val_pobi = Math.max(bigger(pobi[0]), bigger(pobi[1]));
   let val_crong = Math.max(bigger(crong[0]), bigger(crong[1]));
@@ -7,7 +7,7 @@ function problem1(pobi, crong) {
   if(val_crong < val_pobi) return 1;
   else if(val_pobi < val_crong) return 2;
   else if(val_crong === val_pobi) return 0;
-  else return -1;
+  else return -1; //unchecked
 }
 
 function bigger(page){
