@@ -1,6 +1,7 @@
 ## 🚀 기능 요구 사항
 
 레벨 2의 팀 프로젝트 미션으로 SNS(Social Networking Service)를 만들고자 하는 팀이 있다. 팀에 속한 크루 중 평소 알고리즘에 관심이 많은 미스터코는 친구 추천 알고리즘을 구현하고자 아래와 같은 규칙을 세웠다.
+
 - 사용자와 함께 아는 친구의 수 = 10점 
 - 사용자의 타임 라인에 방문한 횟수 = 1점
 
@@ -20,6 +21,18 @@
 
 ### 실행 결과 예시
 
-| user   | friends                                                                                                                         | visitors                                      | result                    |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------- |
-| "mrko" | [ ["donut", "andole"], ["donut", "jun"], ["donut", "mrko"], ["shakevan", "andole"], ["shakevan", "jun"], ["shakevan", "mrko"] ] | ["bedi", "bedi", "donut", "bedi", "shakevan"] | ["andole", "jun", "bedi"] |
+| user   | friends | visitors | result |
+
+| ------ | ------- | -------- | ------ |
+
+| "mrko" | [ ["donut", "andole"], ["donut", "jun"], ["donut", "mrko"], ["shakevan", "andole"], ["shakevan", "jun"], ["shakevan", "mrko"] ] |  ["bedi", "bedi", "donut", "bedi", "shakevan"] | ["andole", "jun", "bedi"] |
+
+user : "mrko" 
+frineds : [ ["donut", "andole"], 
+            ["donut", "jun"], 
+            ["donut", "mrko"], 
+            ["shakevan", "andole"], 
+            ["shakevan", "jun"], 
+            ["shakevan", "mrko"] ] 
+visitors : ["bedi", "bedi", "donut", "bedi", "shakevan"] 
+result : ["andole", "jun", "bedi"]
